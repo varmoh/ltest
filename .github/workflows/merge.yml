@@ -1,22 +1,38 @@
-name: auto merge action
+name: automerge
 on:
   pull_request:
     types:
       - labeled
+      - unlabeled
+      - synchronize
       - opened
+      - edited
+      - ready_for_review
+      - reopened
+      - unlocked
+  pull_request_review:
+    types:
+      - submitted
+  check_suite:
+    types:
+      - completed
+  status: {}
 jobs:
-  autoMerge:
+  automerge:
     runs-on: ubuntu-latest
     steps:
-      - name: automerge
-        uses: buildsville/simple-merge@v1
-        id: merge
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          method: 'squash'
-          labels: '[ "foo", "bar" ]'
-          title: 'commit title'
-          message: 'commit message'
-      - name: result
-        run: |
-          echo "result: ${{ steps.merge.outputs.result }}"
+      - id: automerge
+        name: automerge
+        uses: "pascalgn/automerge-action@v0.15.5"
+        env:
+          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+          MERGE_LABELS: "automerge,!work in progress"
+          MERGE_REMOVE_LABELS: "automerge"
+          MERGE_METHOD: "merge"
+          MERGE_COMMIT_MESSAGE: "pull-request-description"
+          MERGE_FORKS: "false"
+          MERGE_RETRIES: "2"
+          MERGE_RETRY_SLEEP: "10000"
+          MERGE_REQUIRED_APPROVALS: "0"
+          UPDATE_LABELS: ""
+          UPDATE_METHOD: "merge"
