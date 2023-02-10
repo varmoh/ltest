@@ -11,7 +11,7 @@ jobs:
       - uses: murs313/request-review@v1.0
         with:
          token: ${{ secrets.GITHUB_TOKEN }}
-         reviewers: 'KlviG'
+         reviewers: 'varmoh'
          pull-request-number: 1
 
 
