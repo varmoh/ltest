@@ -5,19 +5,23 @@ on:
     types: [opened, review_requested]
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
+ Review:
+   runs-on: ubutu-latest
+   steps:
+      - uses: murs313/request-review@v1.0
+        with:
+         token: ${{ secrets.GITHUB_TOKEN }}
+         reviewers: 'varmoh'
+         pull-request-number: 1
 
+
+ Merge:
+    needs: Review
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - uses: BaharaJr/merge-pr@0.0.2
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-                    
-      - uses: murs313/request-review@v1.0
-        with:
-         token: ${{ secrets.GITHUB_TOKEN }}
-      # Reviewers to add, in space separated list.
-         reviewers: 'varmoh'
-    # Pull request's number to request review.
-         pull-request-number: 1
+
+                  
