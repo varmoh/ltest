@@ -16,7 +16,7 @@ jobs:
                     
       - uses: murs313/request-review@v1.0
         with:
-         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+         token: ${{ secrets.GITHUB_TOKEN }}
       # Reviewers to add, in space separated list.
          reviewers: 'varmoh'
     # Pull request's number to request review.
