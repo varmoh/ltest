@@ -13,3 +13,10 @@ jobs:
       - uses: BaharaJr/merge-pr@0.0.2
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                    
+      - uses: murs313/request-review@v1.0
+        with:
+      # Reviewers to add, in space separated list.
+          reviewers: 'varmoh'
+    # Pull request's number to request review.
+          pull-request-number: 1
