@@ -6,7 +6,7 @@ on:
 
 jobs:
  Review:
-   runs-on: ubutu-latest
+   runs-on: ubuntu-latest
    steps:
       - uses: murs313/request-review@v1.0
         with:
